@@ -1,4 +1,54 @@
 import { useState } from 'react';
+
+export default function Home() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    if (username === 'PetsUp' && password === 'Marla*Roni') {
+      setIsLoggedIn(true);
+    } else {
+      alert('Credenciales incorrectas');
+    }
+  };
+
+  if (!isLoggedIn) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-100">
+        <div className="bg-white p-8 rounded shadow-md w-80">
+          <h1 className="text-2xl font-bold mb-6 text-center">Login PetsUp</h1>
+          <form onSubmit={handleLogin}>
+            <input
+              type="text"
+              placeholder="Usuario"
+              className="w-full p-2 mb-4 border rounded"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              required
+            />
+            <input
+              type="password"
+              placeholder="Contraseña"
+              className="w-full p-2 mb-4 border rounded"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+            <button
+              type="submit"
+              className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600"
+            >
+              Entrar
+            </button>
+          </form>
+        </div>
+      </div>
+    );
+  }
+
+import { useState } from 'react';
 import { initializeApp } from 'firebase/app';
 import { getFirestore, collection, addDoc, getDocs, doc, deleteDoc } from 'firebase/firestore';
 
